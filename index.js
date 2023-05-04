@@ -26,4 +26,16 @@ app.get('/', (ask, give) => {
 
 app.use('/user', userRoutes)
 
+app.get('/chat',(ask,give)=>{
+    give.sendFile(__dirname+"/routes/chat.html")
+})
+
 const io = new Server(httpServer)
+
+io.on("connection",(socket)=>{
+    console.log("user connected");
+    socket.on("chat",(msg)=>{
+        console.log(msg)
+        io.emit('chat',msg)
+    })
+})
