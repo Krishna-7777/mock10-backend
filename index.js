@@ -1,11 +1,12 @@
 const express = require("express")
 const http = require("http")
+const cors = require("cors")
 const { Server } = require("socket.io")
 const { connect } = require("./config/db")
 const { userRoutes } = require("./routes/user.routes")
 
 const app = express()
-
+app.use(cors("*"))
 app.use(express.json())
 
 const httpServer = http.createServer(app)
